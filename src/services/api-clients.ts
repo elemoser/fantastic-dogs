@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://dog.ceo/api/breeds"
+    baseURL: "https://freetestapi.com/api/v1" // "https://dog.ceo/api/breeds"
 });

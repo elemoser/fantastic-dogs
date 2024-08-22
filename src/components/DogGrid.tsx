@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import apiClients from "../services/api-clients";
 import { Text } from "@chakra-ui/react";
 
-interface FetchDogsBreedsResponse {
-  status: string;
-  message: string[];
+interface Dog {
+  id: number;
+  name: string;
 }
 
 const DogGrid = () => {
-  const [dogBreeds, setDogBreeds] = useState<string[]>([]);
+  const [dogs, setDogs] = useState<Dog[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     apiClients
-      .get<FetchDogsBreedsResponse>("list")
-      .then((res) => setDogBreeds(res.data.message))
+      .get<Dog[]>("/dogs")
+      .then((res) => setDogs(res.data))
       .catch((err) => setError(err.message));
   });
 
@@ -22,8 +22,8 @@ const DogGrid = () => {
     <>
       {error && <Text>{error}</Text>}
       <ul>
-        {dogBreeds.map((breed) => (
-          <li key={breed}>{breed}</li>
+        {dogs.map((dog) => (
+          <li key={dog.id}>{dog.name}</li>
         ))}
       </ul>
     </>
