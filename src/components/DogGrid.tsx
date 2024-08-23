@@ -1,22 +1,8 @@
-import { useEffect, useState } from "react";
-import apiClients from "../services/api-clients";
 import { Text } from "@chakra-ui/react";
-
-interface Dog {
-  id: number;
-  name: string;
-}
+import useDogs from "../hooks/useDogs";
 
 const DogGrid = () => {
-  const [dogs, setDogs] = useState<Dog[]>([]);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    apiClients
-      .get<Dog[]>("/dogs")
-      .then((res) => setDogs(res.data))
-      .catch((err) => setError(err.message));
-  });
+  const { dogs, error } = useDogs();
 
   return (
     <>
