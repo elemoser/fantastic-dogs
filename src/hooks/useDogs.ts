@@ -5,7 +5,7 @@ import { CanceledError } from "axios";
 export interface Dog {
     id: number;
     name: string;
-    image: string;
+    reference_image_id: string;
   }
 
 const useDogs = () => {
@@ -16,7 +16,7 @@ const useDogs = () => {
       const controller = new AbortController();
 
       apiClients
-        .get<Dog[]>("/dogs", {signal: controller.signal})
+        .get<Dog[]>("/breeds", {signal: controller.signal})
         .then((res) => setDogs(res.data))
         .catch((err) => {
             if (err instanceof CanceledError) return;
