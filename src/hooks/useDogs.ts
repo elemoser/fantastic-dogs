@@ -12,22 +12,28 @@ export interface Dog {
 const useDogs = () => {
     const [dogs, setDogs] = useState<Dog[]>([]);
     const [error, setError] = useState("");
+    const [isLoading, setLoading] = useState(false);
   
     useEffect(() => {
       const controller = new AbortController();
-
+    
+      setLoading(true);
       apiClients
         .get<Dog[]>("/breeds", {signal: controller.signal})
-        .then((res) => setDogs(res.data))
+        .then((res) => {
+            setDogs(res.data);
+            setLoading(false);
+        })
         .catch((err) => {
             if (err instanceof CanceledError) return;
             setError(err.message);
+            setLoading(false);
         });
 
       return () => controller.abort();
     }, []);
 
-    return {dogs, error};
+    return {dogs, error, isLoading};
 }
 
 export default useDogs;

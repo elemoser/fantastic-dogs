@@ -13,7 +13,7 @@ const DogCard = ({ dog }: Props) => {
   });
 
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card>
       {dogImage.id && <Image src={dogImage.url} />}
       <CardBody>
         <Heading fontSize="2xl">{dog.name}</Heading>
