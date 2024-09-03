@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Box, Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
 import { Dog } from "../hooks/useDogs";
 import useDogImage from "../hooks/useDogImage";
 
@@ -17,6 +17,7 @@ const DogCard = ({ dog }: Props) => {
       {dogImage.id && <Image src={dogImage.url} />}
       <CardBody>
         <Heading fontSize="2xl">{dog.name}</Heading>
+        <Text>{dog.breed_group ? dog.breed_group : "Other"}</Text>
       </CardBody>
     </Card>
   );

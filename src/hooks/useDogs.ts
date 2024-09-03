@@ -5,6 +5,7 @@ import { CanceledError } from "axios";
 export interface Dog {
     id: number;
     name: string;
+    breed_group: string;
     reference_image_id: string;
   }
 
