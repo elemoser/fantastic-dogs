@@ -1,4 +1,4 @@
-import { List, ListItem, Text } from "@chakra-ui/react";
+import { List, ListItem, Spinner, Text } from "@chakra-ui/react";
 import { Dog } from "../hooks/useDogs";
 
 interface Props {
@@ -12,9 +12,13 @@ const DogGroup = ({ dogs, error, isLoading }: Props) => {
     item.breed_group ? item.breed_group : "Other"
   );
   let dogGroup = [...new Set(dogBreedGroup)];
+
+  if (error) return null;
+
+  if (isLoading) return <Spinner />;
+
   return (
     <>
-      {error && <Text>{error}</Text>}
       <List>
         {dogGroup.map((group, index) => (
           <ListItem key={index}>{group}</ListItem>
