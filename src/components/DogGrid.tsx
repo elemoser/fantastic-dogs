@@ -1,11 +1,17 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useDogs from "../hooks/useDogs";
+import useDogs, { Dog } from "../hooks/useDogs";
 import DogCard from "./DogCard";
 import DogCardSkeleton from "./DogCardSkeleton";
 import DogCardContainer from "./DogCardContainer";
 
-const DogGrid = () => {
-  const { dogs, error, isLoading } = useDogs();
+interface Props {
+  dogs: Dog[];
+  error: string;
+  isLoading: boolean;
+}
+
+const DogGrid = ({ dogs, error, isLoading }: Props) => {
+  //   const { dogs, error, isLoading } = useDogs();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
@@ -18,12 +24,12 @@ const DogGrid = () => {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <DogCardContainer>
+            <DogCardContainer key={skeleton}>
               <DogCardSkeleton key={skeleton} />
             </DogCardContainer>
           ))}
         {dogs.map((dog) => (
-          <DogCardContainer>
+          <DogCardContainer key={dog.id}>
             <DogCard key={dog.id} dog={dog} />
           </DogCardContainer>
         ))}

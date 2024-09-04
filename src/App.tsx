@@ -1,8 +1,12 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import DogGrid from "./components/DogGrid";
+import DogGroup from "./components/DogGroup";
+import useDogs from "./hooks/useDogs";
 
 function App() {
+  const { dogs, error, isLoading } = useDogs();
+
   return (
     <Grid
       templateAreas={{
@@ -14,10 +18,12 @@ function App() {
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside">Aside</GridItem>
+        <GridItem area="aside">
+          <DogGroup dogs={dogs} error={error} isLoading={isLoading} />
+        </GridItem>
       </Show>
       <GridItem area="main">
-        <DogGrid />
+        <DogGrid dogs={dogs} error={error} isLoading={isLoading} />
       </GridItem>
     </Grid>
   );
